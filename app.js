@@ -4,7 +4,22 @@ keyboardContainer.classList.add('keyboard-container');
 const keyboardKeys = [
   ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']'],
   ['CapsLock', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", '\\'],
-  ['Shift', '`', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'au', 'shift'],
+  [
+    'Shift',
+    '`',
+    'z',
+    'x',
+    'c',
+    'v',
+    'b',
+    'n',
+    'm',
+    ',',
+    '.',
+    '/',
+    'au',
+    'shift',
+  ],
 ];
 const digitKey = [
   '§',
@@ -20,18 +35,15 @@ const digitKey = [
   '0',
   '-',
   '=',
-  'Backspace'
+  'Backspace',
 ];
-
 
 const displayValue = [];
 const display = document.createElement('textarea');
 display.classList.add('display');
 keyboardContainer.appendChild(display);
-
 const digitContainer = document.createElement('div');
 digitContainer.classList.add('keyboard-row');
-
 digitKey.forEach((key) => {
   const keyElement = document.createElement('button');
   keyElement.classList.add('keyboard-key');
@@ -56,16 +68,15 @@ digitKey.forEach((key) => {
       break;
   }
   keyElement.addEventListener('click', () => {
-    if(key.length === 1){
+    if (key.length === 1) {
       displayValue.push(key);
       display.innerHTML = displayValue.join('');
     } else {
-      if(displayValue.length){
-        displayValue.pop()
+      if (displayValue.length) {
+        displayValue.pop();
         display.innerHTML = displayValue.join('');
       }
     }
-
     keyElement.classList.toggle('activeBtn');
     setTimeout(() => {
       keyElement.classList.toggle('activeBtn');
@@ -73,26 +84,26 @@ digitKey.forEach((key) => {
   });
   digitContainer.appendChild(keyElement);
 });
+
 keyboardContainer.appendChild(digitContainer);
 
 keyboardKeys.forEach((row) => {
   const rowElement = document.createElement('div');
   rowElement.classList.add('keyboard-row');
-
   row.forEach((key) => {
     const keyElement = document.createElement('button');
     keyElement.classList.add('keyboard-key');
-    if(key!=='au'){
-    keyElement.innerText = key;
-  } else {
-    keyElement.innerHTML = "&#x2191;"
-  }
+    if (key !== 'au') {
+      keyElement.innerText = key;
+    } else {
+      keyElement.innerHTML = '&#x2191;';
+    }
     keyElement.addEventListener('click', () => {
-      if(key.length === 1){
+      if (key.length === 1) {
         displayValue.push(key);
         display.innerHTML = displayValue.join('');
-      } else if (key === 'Tab'){
-        tab()
+      } else if (key === 'Tab') {
+        tab();
       }
       keyElement.classList.toggle('activeBtn');
       setTimeout(() => {
@@ -127,26 +138,26 @@ keyboardKeys.forEach((row) => {
       case '`':
         keyElement.code = 'IntlBackslash';
         break;
-        case 'Tab':
-          keyElement.code = 'Tab';
-          keyElement.classList.add('tab');
-          break;
-        case 'Shift':
-          keyElement.code = 'ShiftLeft';
-          keyElement.classList.add('shiftleft');
-          break;
-        case 'CapsLock':
-          keyElement.code = 'CapsLock';
-          keyElement.classList.add('caps');
-          break;
-        case 'shift':
-          keyElement.code = 'ShiftRight';
-          keyElement.classList.add('shiftright');
-          break;
-          case 'au':
-            keyElement.code = 'ArrowUp';
-            keyElement.classList.add('ArrowUp');
-            break;
+      case 'Tab':
+        keyElement.code = 'Tab';
+        keyElement.classList.add('tab');
+        break;
+      case 'Shift':
+        keyElement.code = 'ShiftLeft';
+        keyElement.classList.add('shiftleft');
+        break;
+      case 'CapsLock':
+        keyElement.code = 'CapsLock';
+        keyElement.classList.add('caps');
+        break;
+      case 'shift':
+        keyElement.code = 'ShiftRight';
+        keyElement.classList.add('shiftright');
+        break;
+      case 'au':
+        keyElement.code = 'ArrowUp';
+        keyElement.classList.add('ArrowUp');
+        break;
       default:
         keyElement.code = `Key${key.toUpperCase()}`;
         break;
@@ -155,7 +166,6 @@ keyboardKeys.forEach((row) => {
   });
   keyboardContainer.appendChild(rowElement);
 });
-
 
 document.body.appendChild(keyboardContainer);
 
@@ -166,65 +176,71 @@ const specialKeys = [
   'space',
   'command',
   'opt',
-  'al', 
+  'al',
   'ad',
-  'ar'
+  'ar',
 ];
 
 specialKeys.forEach((key) => {
   const keyElement = document.createElement('button');
   keyElement.classList.add('keyboard-key');
-  if(key.length === 2){
- switch(key){
-  case 'al': keyElement.innerHTML = "&#x2190;"; break;
-  case 'ad': keyElement.innerHTML = "&#x2193;"; break;
-  case 'ar': keyElement.innerHTML = "&#x2192;"; break;
- }
+  if (key.length === 2) {
+    switch (key) {
+      case 'al':
+        keyElement.innerHTML = '&#x2190;';
+        break;
+      case 'ad':
+        keyElement.innerHTML = '&#x2193;';
+        break;
+      case 'ar':
+        keyElement.innerHTML = '&#x2192;';
+        break;
+    }
   } else {
-  keyElement.innerHTML = key;
+    keyElement.innerHTML = key;
   }
   switch (key) {
     case 'control':
       keyElement.code = 'ControlLeft';
       keyElement.classList.add('ControlLeft');
-          break;
-        case 'option':
-          keyElement.code = 'AltLeft';
-          keyElement.classList.add('AltLeft');
-          break;
-        case 'cmd':
-          keyElement.code = 'MetaLeft';
-          keyElement.classList.add('MetaLeft');
-          break;
-        case 'space':
-          keyElement.code = 'Space';
-          keyElement.classList.add('Space');
-          keyElement.addEventListener('click', ()=>{
-            displayValue.push(" ");
-            display.innerHTML = displayValue.join('');
-          })
-          break;
-        case 'command':
-          keyElement.code = 'MetaRight';
-          keyElement.classList.add('MetaRight');
-          break;
-        case 'opt':
-          keyElement.code = 'AltRight';
-          keyElement.classList.add('AltRight');
-          break;
-        case 'ArrowRight':
-          keyElement.code = 'ControlLeft';
-          keyElement.classList.add('ControlLeft');
-          break;
-        case 'ArrowLeft':
-          keyElement.code = 'ArrowLeft';
-          keyElement.classList.add('ArrowLeft');
-          break;
+      break;
+    case 'option':
+      keyElement.code = 'AltLeft';
+      keyElement.classList.add('AltLeft');
+      break;
+    case 'cmd':
+      keyElement.code = 'MetaLeft';
+      keyElement.classList.add('MetaLeft');
+      break;
+    case 'space':
+      keyElement.code = 'Space';
+      keyElement.classList.add('Space');
+      keyElement.addEventListener('click', () => {
+        displayValue.push(' ');
+        display.innerHTML = displayValue.join('');
+      });
+      break;
+    case 'command':
+      keyElement.code = 'MetaRight';
+      keyElement.classList.add('MetaRight');
+      break;
+    case 'opt':
+      keyElement.code = 'AltRight';
+      keyElement.classList.add('AltRight');
+      break;
+    case 'ArrowRight':
+      keyElement.code = 'ControlLeft';
+      keyElement.classList.add('ControlLeft');
+      break;
+    case 'ArrowLeft':
+      keyElement.code = 'ArrowLeft';
+      keyElement.classList.add('ArrowLeft');
+      break;
 
-        case 'ArrowDown':
-          keyElement.code = 'ArrowDown';
-          keyElement.classList.add('ArrowDown');
-          break;
+    case 'ArrowDown':
+      keyElement.code = 'ArrowDown';
+      keyElement.classList.add('ArrowDown');
+      break;
   }
 
   keyElement.addEventListener('click', () => {
@@ -237,25 +253,25 @@ specialKeys.forEach((key) => {
   keyboardContainer.appendChild(keyElement);
 });
 
-const enter = document.createElement('button')
-enter.innerText = 'Enter'
-enter.code = 'Enter'
-enter.classList.add('keyboard-key')
-enter.classList.add('enter')
-enter.addEventListener('click', ()=>{
-  displayValue.push("\n");
+const enter = document.createElement('button');
+enter.innerText = 'Enter';
+enter.code = 'Enter';
+enter.classList.add('keyboard-key');
+enter.classList.add('enter');
+enter.addEventListener('click', () => {
+  displayValue.push('\n');
   display.innerHTML = displayValue.join('');
   enter.classList.toggle('activeBtn');
   setTimeout(() => {
     enter.classList.toggle('activeBtn');
   }, 100);
-})
+});
 keyboardContainer.appendChild(enter);
 document.addEventListener('keypress', (e) => {
   console.log(e);
   const keys = document.querySelectorAll('.keyboard-key');
   const arr = Array.from(keys);
-  if(e.key.length === 1){
+  if (e.key.length === 1) {
     displayValue.push(e.key);
     display.innerHTML = displayValue.join('');
   }
@@ -269,7 +285,7 @@ document.addEventListener('keypress', (e) => {
   });
 });
 document.addEventListener('keydown', (e) => {
-console.log(e);
+  console.log(e);
   toggle(e);
 });
 
@@ -285,7 +301,7 @@ function toggle(e) {
       switch (el.code) {
         case 'Tab':
           el.classList.toggle('activeBtn');
-tab()
+          tab();
           break;
         case 'CapsLock':
           el.classList.toggle('activeBtn');
@@ -333,15 +349,14 @@ tab()
     }
   });
 }
-function tab(){
-  for(let i = 0; i<4; i++){
+function tab() {
+  for (let i = 0; i < 4; i++) {
     displayValue.push(' ');
-    display.innerHTML = displayValue.join('');}
-  
+    display.innerHTML = displayValue.join('');
+  }
 }
 
-
-function addEventListen (key, element) {
+function addEventListen(key, element) {
   displayValue.push(key);
   display.innerHTML = displayValue.join('');
   element.classList.toggle('activeBtn');
@@ -349,3 +364,4 @@ function addEventListen (key, element) {
     element.classList.toggle('activeBtn');
   }, 100);
 }
+console.log('Дико извиняюсь за эту простыню из кода. на рефактор не хватило времени');
