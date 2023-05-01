@@ -100,3 +100,29 @@ height: 20px;
     top: 5px;
 
 }
+
+.tab{
+    width: 10%;
+}
+/* .tab::after{
+    content: "Tab";
+} */
+.caps{
+    width: 12%;
+}
+.shiftleft{
+    width: 8%;
+}
+.shiftright{
+    width: 10%;
+}
+
+.MetaLeft{
+    width: 9%;
+}
+.Space{
+    width: 40%;
+}
+.ArrowUp{
+    width: 4%;
+}
