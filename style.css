@@ -1,0 +1,145 @@
+body{
+    padding: 50px;
+}
+.keyboard-container{
+position: relative;
+}
+
+.display{
+    border: 1px black solid;
+    width: 100%;
+    height: 60px;
+    border-radius: 10px;
+}
+.keyboard-key{
+    width:6%;
+    height: 60px;
+    margin: 5px;
+    background-color: #fff;
+    border: black 1px solid;
+    border-radius: 5px;
+    position: relative;
+
+    font-size: 1.1em;
+}
+
+.shift{
+    width: 50px;
+height: 20px;
+}
+
+.digit1::after{
+    content: "!";
+    position: absolute;
+    left: 5px;
+    top: 5px;
+
+}
+.digit2::after{
+    content: "@";
+    position: absolute;
+    left: 5px;
+    top: 5px;
+
+}
+.digit3::after{
+    content: "#";
+    position: absolute;
+    left: 5px;
+    top: 5px;
+
+}
+.digit4::after{
+    content: "$";
+    position: absolute;
+    left: 5px;
+    top: 5px;
+
+}
+.digit5::after{
+    content: "%";
+    position: absolute;
+    left: 5px;
+    top: 5px;
+
+}
+.digit6::after{
+    content: "^";
+    position: absolute;
+    left: 5px;
+    top: 5px;
+
+}
+.digit7::after{
+    content: "&";
+    position: absolute;
+    left: 5px;
+    top: 5px;
+
+}
+.digit8::after{
+    content: "*";
+    position: absolute;
+    left: 5px;
+    top: 5px;
+
+}
+.digit9::after{
+    content: "(";
+    position: absolute;
+    left: 5px;
+    top: 5px;
+
+}
+.digit0::after{
+    content: ")";
+    position: absolute;
+    left: 5px;
+    top: 5px;
+
+}
+
+.tab{
+    width: 12%;
+}
+/* .tab::after{
+    content: "Tab";
+} */
+.caps{
+    width: 12%;
+}
+.shiftleft{
+    width: 9%;
+}
+.shiftright{
+    width: 7%;
+}
+
+.MetaLeft{
+    width: 9%;
+}
+.MetaRight{
+    width: 7%; 
+}
+.Space{
+    width: 40%;
+}
+.ArrowUp{
+    width: 6%;
+}
+.backspace{
+    width: 10%;
+}
+.enter{
+    position: absolute;
+    top: 140px;
+    right: -8px;
+    width: 6%;
+    height: 130px;
+    background-color: #fff;
+    border: black 1px solid;
+    border-radius: 5px;;
+}
+.activeBtn{
+    background-color: blue;
+}
