@@ -2,7 +2,7 @@ body{
     padding: 50px;
 }
 .keyboard-container{
-
+position: relative;
 }
 
 .display{
@@ -22,9 +22,7 @@ body{
 
     font-size: 1.1em;
 }
-.activeBtn{
-    background-color: blue;
-}
+
 .shift{
     width: 50px;
 height: 20px;
@@ -102,7 +100,7 @@ height: 20px;
 }
 
 .tab{
-    width: 10%;
+    width: 12%;
 }
 /* .tab::after{
     content: "Tab";
@@ -111,18 +109,37 @@ height: 20px;
     width: 12%;
 }
 .shiftleft{
-    width: 8%;
+    width: 9%;
 }
 .shiftright{
-    width: 10%;
+    width: 7%;
 }
 
 .MetaLeft{
     width: 9%;
 }
+.MetaRight{
+    width: 7%; 
+}
 .Space{
     width: 40%;
 }
 .ArrowUp{
-    width: 4%;
+    width: 6%;
+}
+.backspace{
+    width: 10%;
+}
+.enter{
+    position: absolute;
+    top: 140px;
+    right: -8px;
+    width: 6%;
+    height: 130px;
+    background-color: #fff;
+    border: black 1px solid;
+    border-radius: 5px;;
+}
+.activeBtn{
+    background-color: blue;
 }

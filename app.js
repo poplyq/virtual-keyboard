@@ -20,6 +20,7 @@ const digitKey = [
   '0',
   '-',
   '=',
+  'Backspace'
 ];
 
 
@@ -45,14 +46,26 @@ digitKey.forEach((key) => {
     case '=':
       keyElement.code = 'Equal';
       break;
+    case 'Backspace':
+      keyElement.code = 'Backspace';
+      keyElement.classList.add('backspace');
+      break;
     default:
       keyElement.code = `Digit${key.toUpperCase()}`;
       keyElement.classList.add(`digit${key}`);
       break;
   }
   keyElement.addEventListener('click', () => {
-    displayValue.push(key);
-    display.innerHTML = displayValue.join('');
+    if(key.length === 1){
+      displayValue.push(key);
+      display.innerHTML = displayValue.join('');
+    } else {
+      if(displayValue.length){
+        displayValue.pop()
+        display.innerHTML = displayValue.join('');
+      }
+    }
+
     keyElement.classList.toggle('activeBtn');
     setTimeout(() => {
       keyElement.classList.toggle('activeBtn');
@@ -69,22 +82,24 @@ keyboardKeys.forEach((row) => {
   row.forEach((key) => {
     const keyElement = document.createElement('button');
     keyElement.classList.add('keyboard-key');
+    if(key!=='au'){
     keyElement.innerText = key;
+  } else {
+    keyElement.innerHTML = "&#x2191;"
+  }
     keyElement.addEventListener('click', () => {
-      displayValue.push(key);
-      display.innerHTML = displayValue.join('');
+      if(key.length === 1){
+        displayValue.push(key);
+        display.innerHTML = displayValue.join('');
+      } else if (key === 'Tab'){
+        tab()
+      }
       keyElement.classList.toggle('activeBtn');
       setTimeout(() => {
         keyElement.classList.toggle('activeBtn');
       }, 100);
     });
     switch (key) {
-      case '-':
-        keyElement.code = 'Minus';
-        break;
-      case '=':
-        keyElement.code = 'Equal';
-        break;
       case '[':
         keyElement.code = 'BracketLeft';
         break;
@@ -112,6 +127,26 @@ keyboardKeys.forEach((row) => {
       case '`':
         keyElement.code = 'IntlBackslash';
         break;
+        case 'Tab':
+          keyElement.code = 'Tab';
+          keyElement.classList.add('tab');
+          break;
+        case 'Shift':
+          keyElement.code = 'ShiftLeft';
+          keyElement.classList.add('shiftleft');
+          break;
+        case 'CapsLock':
+          keyElement.code = 'CapsLock';
+          keyElement.classList.add('caps');
+          break;
+        case 'shift':
+          keyElement.code = 'ShiftRight';
+          keyElement.classList.add('shiftright');
+          break;
+          case 'au':
+            keyElement.code = 'ArrowUp';
+            keyElement.classList.add('ArrowUp');
+            break;
       default:
         keyElement.code = `Key${key.toUpperCase()}`;
         break;
@@ -131,12 +166,23 @@ const specialKeys = [
   'space',
   'command',
   'opt',
+  'al', 
+  'ad',
+  'ar'
 ];
 
 specialKeys.forEach((key) => {
   const keyElement = document.createElement('button');
   keyElement.classList.add('keyboard-key');
+  if(key.length === 2){
+ switch(key){
+  case 'al': keyElement.innerHTML = "&#x2190;"; break;
+  case 'ad': keyElement.innerHTML = "&#x2193;"; break;
+  case 'ar': keyElement.innerHTML = "&#x2192;"; break;
+ }
+  } else {
   keyElement.innerHTML = key;
+  }
   switch (key) {
     case 'control':
       keyElement.code = 'ControlLeft';
@@ -153,6 +199,10 @@ specialKeys.forEach((key) => {
         case 'space':
           keyElement.code = 'Space';
           keyElement.classList.add('Space');
+          keyElement.addEventListener('click', ()=>{
+            displayValue.push(" ");
+            display.innerHTML = displayValue.join('');
+          })
           break;
         case 'command':
           keyElement.code = 'MetaRight';
@@ -187,43 +237,28 @@ specialKeys.forEach((key) => {
   keyboardContainer.appendChild(keyElement);
 });
 
-const spesialLeft=['Tab', 'Shift', 'CapsLock',]
-spesialLeft.forEach(()=>{
-  const keyElement = document.createElement('button');
-  keyElement.classList.add('keyboard-key');
-  keyElement.innerHTML = key;
-  switch (key) {
-  case 'Tab':
-    keyElement.code = 'Tab';
-    keyElement.classList.add('tab');
-    break;
-  case 'Shift':
-    keyElement.code = 'ShiftLeft';
-    keyElement.classList.add('shiftleft');
-    break;
-  case 'CapsLock':
-    keyElement.code = 'CapsLock';
-    keyElement.classList.add('caps');
-    break;
-  case 'shift':
-    keyElement.code = 'ShiftRight';
-    keyElement.classList.add('shiftright');
-    break;
-    case 'au':
-      keyElement.code = 'ArrowUp';
-      keyElement.classList.add('ArrowUp');
-      break;
-}
-keyboardContainer.appendChild(keyElement);
-}
-)
-
+const enter = document.createElement('button')
+enter.innerText = 'Enter'
+enter.code = 'Enter'
+enter.classList.add('keyboard-key')
+enter.classList.add('enter')
+enter.addEventListener('click', ()=>{
+  displayValue.push("\n");
+  display.innerHTML = displayValue.join('');
+  enter.classList.toggle('activeBtn');
+  setTimeout(() => {
+    enter.classList.toggle('activeBtn');
+  }, 100);
+})
+keyboardContainer.appendChild(enter);
 document.addEventListener('keypress', (e) => {
   console.log(e);
   const keys = document.querySelectorAll('.keyboard-key');
   const arr = Array.from(keys);
-  displayValue.push(e.key);
-  display.innerHTML = displayValue.join('');
+  if(e.key.length === 1){
+    displayValue.push(e.key);
+    display.innerHTML = displayValue.join('');
+  }
   arr.forEach((el) => {
     if (el.code === e.code) {
       el.classList.toggle('activeBtn');
@@ -253,6 +288,9 @@ function toggle(e) {
 tab()
           break;
         case 'CapsLock':
+          el.classList.toggle('activeBtn');
+          break;
+        case 'Enter':
           el.classList.toggle('activeBtn');
           break;
         case 'ShiftLeft':
